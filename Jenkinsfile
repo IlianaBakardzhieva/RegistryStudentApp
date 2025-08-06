@@ -14,7 +14,7 @@ pipeline {
                     if (isUnix()) {
                         sh 'npm install'
                     } else {
-                        bat 'npm install'
+                        sh 'npm install'
                     }
                 }
             }
