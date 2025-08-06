@@ -1,32 +1,40 @@
 pipeline {
     agent any
-    
+
+    tools {
+        nodejs '18.x'
+    }
+
     stages {
-        stage{'Checkout'}{
-            steps { 
+        stage('Checkout') {
+            steps {
                 checkout scm
             }
         }
-        stage {'Install dependencies'}{
+
+        stage('Install dependencies') {
             steps {
-                if (isunix()){
-                    sh 'npm install'
-                } else {
-                    sh 'npm install'
+                script {
+                    if (isUnix()) {
+                        sh 'npm install'
+                    } else {
+                        bat 'npm install'
+                    }
                 }
-                
             }
         }
-        stage {'start application and run tests'}{
+
+        stage('Start application and run tests') {
             steps {
                 script {
                     sh 'npm start &'
-                    sh  'wait-on http://localhost:8080'
+                    sh 'npx wait-on http://localhost:8080'
                     sh 'npm test'
                 }
             }
         }
     }
+
     post {
         always {
             echo 'CI pipeline completed'
