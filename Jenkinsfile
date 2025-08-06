@@ -3,12 +3,12 @@ pipeline {
     agent any
     
     stages {
-        stage('Checkout'){
+        stage("Checkout"){
             steps { 
                 git branch: 'main', url: 'https://github.com/IlianaBakardzhieva/RegistryStudentApp'
             }
         }
-        stage ('Install dependencies'){
+        stage("Install dependencies"){
             steps {
                 script {
                     bat 'npm install'
@@ -16,7 +16,7 @@ pipeline {
                 
             }
         }
-        stage ('start application and run tests'){
+        stage("Start application and run tests"){
             steps {
                 script {
                     bat 'npm start &'
@@ -27,8 +27,8 @@ pipeline {
         }
     }
     post {
-        always {
-            echo 'CI pipeline completed'
+        always{
+            echo "CI pipeline completed"
         }
     }
 }
