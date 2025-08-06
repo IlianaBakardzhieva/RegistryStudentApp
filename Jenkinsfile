@@ -29,7 +29,7 @@ pipeline {
                     bat 'start npm test'
                 }
             }
-        }")
+        }
     }
     post {
         always{
