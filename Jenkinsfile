@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     sh 'npm start &'
-                    sh  'wait-on http://localhost:8090'
+                    sh  'wait-on http://localhost:8080'
                     sh 'npm test'
                 }
             }
