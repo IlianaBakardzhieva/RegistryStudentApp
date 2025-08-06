@@ -19,12 +19,17 @@ pipeline {
         stage("Start application and run tests"){
             steps {
                 script {
-                    bat 'npm start &'
-                    bat 'wait-on http://localhost:8080'
-                    bat 'npm test'
+                    bat 'start /b npm start'
                 }
             }
         }
+        stage ("Run tests"){
+            steps{ 
+                script {
+                    bat 'start npm test'
+                }
+            }
+        }")
     }
     post {
         always{
