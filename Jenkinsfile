@@ -5,15 +5,13 @@ pipeline {
     stages {
         stage{'Checkout'}{
             steps { 
-                checkout scm
+                git branch: 'main', url: 'https://github.com/IlianaBakardzhieva/RegistryStudentApp'
             }
         }
         stage {'Install dependencies'}{
             steps {
-                if (isunix()){
-                    sh 'npm install'
-                } else {
-                    sh 'npm install'
+                script {
+                    bat 'npm install'
                 }
                 
             }
@@ -21,9 +19,9 @@ pipeline {
         stage {'start application and run tests'}{
             steps {
                 script {
-                    sh 'npm start &'
-                    sh  'wait-on http://localhost:8080'
-                    sh 'npm test'
+                    bat 'npm start &'
+                    bat 'wait-on http://localhost:8080'
+                    bat 'npm test'
                 }
             }
         }
